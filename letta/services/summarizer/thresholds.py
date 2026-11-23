@@ -38,4 +38,6 @@ def get_compaction_trigger_threshold(llm_config: LLMConfig, *, force_proactive: 
 
     All other models trigger at 100% of context window.
     """
-    return int(llm_config.context_window * SUMMARIZATION_TRIGGER_MULTIPLIER)
+    if force_proactive or is_gpt5_model_family(llm_config.model):
+        return int(llm_config.context_window * SUMMARIZATION_TRIGGER_MULTIPLIER)
+    return int(llm_config.context_window)
