@@ -90,7 +90,7 @@ def load_config_file(config_path: str | Path | None = None) -> dict[str, Any]:
     config: dict[str, Any] = {}
     for path in paths_to_check:
         try:
-            with open(path, "r") as f:
+            with open(path, "r", encoding="utf-8") as f:
                 file_config = yaml.safe_load(f)
                 if file_config:
                     config = _deep_merge(config, file_config)
